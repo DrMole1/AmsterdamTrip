@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AmsterdamTrip.MainPage">
+
+    <StackLayout x:Name="MainLayout"
+                 BackgroundColor="Gray"
+                 Margin="10"
+                 Spacing="10"
+                 Padding="8"
+                 Orientation="Vertical">
+
+        <Frame BorderColor="White"
+               Padding="5"
+               BackgroundColor="Black"
+               VerticalOptions="Start">
+
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="CenterAndExpand">
+
+                <Label Text="Amsterdam"
+                   FontSize="40"
+                   TextColor="White"/>
+
+                <Label Text="Trip"
+                   FontSize="40"
+                   TextColor="Purple"/>
+            </StackLayout>
+        </Frame>
+
+        <StackLayout VerticalOptions="CenterAndExpand">
+
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="CenterAndExpand">
+
+                <StackLayout Orientation="Vertical"
+                             Padding="8"
+                             Margin="6"
+                             WidthRequest="150"
+                             HeightRequest="160"
+                             BackgroundColor="Purple">
+
+                    <Label Text="MUSEUMS"
+                           HorizontalOptions="CenterAndExpand"
+                           TextColor="White"
+                           FontSize="30"
+                           FontFamily="Bold">
+                    </Label>
+
+                    <ImageButton HeightRequest="100"
+                            WidthRequest="100"
+                            HorizontalOptions="CenterAndExpand"
+                            Margin="10"
+                            BorderColor="Black"
+                            BorderWidth="5"
+                            CornerRadius="8"
+                            Source="Museum"
+                            Aspect="AspectFit"
+                            FlexLayout.AlignSelf="Center"
+                            FlexLayout.Grow="1"
+                            BackgroundColor="Transparent"
+                                 
+                            Clicked="GoToMuseumPage"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical"
+                             Padding="8"
+                             Margin="6"
+                             WidthRequest="150"
+                             HeightRequest="160"
+                             BackgroundColor="Purple">
+
+                    <Label Text="PLACES"
+                           HorizontalOptions="CenterAndExpand"
+                           TextColor="White"
+                           FontSize="30"
+                           FontFamily="Bold">
+                    </Label>
+
+                    <ImageButton HeightRequest="100"
+                            WidthRequest="100"
+                            HorizontalOptions="CenterAndExpand"
+                            Margin="10"
+                            BorderColor="Black"
+                            BorderWidth="5"
+                            CornerRadius="8"
+                            Source="Place"
+                            Aspect="AspectFit"
+                            FlexLayout.AlignSelf="Center"
+                            FlexLayout.Grow="1"
+                            BackgroundColor="Transparent"
+                                 
+                            Clicked="GoToPlacePage"/>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="CenterAndExpand"
+                         Spacing="115">
+
+                <Frame CornerRadius="6">
+                    <Label x:Name="TotalMuseums"
+                           Text="0/0"
+                           FontAttributes="Bold"
+                           TextColor="Black">
+                    </Label>
+                </Frame>
+
+                <Frame CornerRadius="6">
+                    <Label x:Name="TotalPlaces"
+                           Text="0/0"
+                           FontAttributes="Bold"
+                           TextColor="Black">
+                    </Label>
+                </Frame>
+
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="CenterAndExpand">
+
+                <StackLayout Orientation="Vertical"
+                             Padding="8"
+                             Margin="6"
+                             WidthRequest="150"
+                             HeightRequest="160"
+                             BackgroundColor="Purple">
+
+                    <Label Text="FOODS"
+                           HorizontalOptions="CenterAndExpand"
+                           TextColor="White"
+                           FontSize="30"
+                           FontFamily="Bold">
+                    </Label>
+
+                    <ImageButton HeightRequest="100"
+                            WidthRequest="100"
+                            HorizontalOptions="CenterAndExpand"
+                            Margin="10"
+                            BorderColor="Black"
+                            BorderWidth="5"
+                            CornerRadius="8"
+                            Source="Food"
+                            Aspect="AspectFit"
+                            FlexLayout.AlignSelf="Center"
+                            FlexLayout.Grow="1"
+                            BackgroundColor="Transparent"
+                                 
+                            Clicked="GoToFoodPage"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Vertical"
+                             Padding="8"
+                             Margin="6"
+                             WidthRequest="150"
+                             HeightRequest="160"
+                             BackgroundColor="Purple">
+
+                    <Label Text="DRINKS"
+                           HorizontalOptions="CenterAndExpand"
+                           TextColor="White"
+                           FontSize="30"
+                           FontFamily="Bold">
+                    </Label>
+
+                    <ImageButton HeightRequest="100"
+                            WidthRequest="100"
+                            HorizontalOptions="CenterAndExpand"
+                            Margin="10"
+                            BorderColor="Black"
+                            BorderWidth="5"
+                            CornerRadius="8"
+                            Source="Drink"
+                            Aspect="AspectFit"
+                            FlexLayout.AlignSelf="Center"
+                            FlexLayout.Grow="1"
+                            BackgroundColor="Transparent"
+                                 
+                            Clicked="GoToDrinkPage"/>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="CenterAndExpand"
+                         Spacing="115">
+
+                <Frame CornerRadius="6">
+                    <Label x:Name="TotalFoods"
+                           Text="0/0"
+                           FontAttributes="Bold"
+                           TextColor="Black">
+                    </Label>
+                </Frame>
+
+                <Frame CornerRadius="6">
+                    <Label x:Name="TotalDrinks"
+                           Text="0/0"
+                           FontAttributes="Bold"
+                           TextColor="Black">
+                    </Label>
+                </Frame>
+
+            </StackLayout>
+
+        </StackLayout>
+
+
+        <Frame BorderColor="Black"
+               Padding="5"
+               VerticalOptions="EndAndExpand">
+
+            <Label Text="Developed by Bastien Prob for holidays in Amsterdam, 19-26/07/2022."
+                   FontSize="Medium"/>
+        </Frame>
+
+    </StackLayout>
+
+</ContentPage>

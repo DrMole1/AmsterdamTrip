@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AmsterdamTrip.AddItemPage">
+    <ContentPage.Content>
+        <StackLayout x:Name="MainLayout"
+                 BackgroundColor="Gray"
+                 Margin="10"
+                 Spacing="10"
+                 Padding="8"
+                 Orientation="Vertical">
+
+            <Frame BorderColor="White"
+               Padding="5"
+               BackgroundColor="Black"
+               VerticalOptions="Start">
+
+                <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="CenterAndExpand">
+
+                    <Button HeightRequest = "50"
+                            WidthRequest = "90"
+                            Margin = "6"
+                            Padding = "8"
+                            Text = "Previous"
+                            CornerRadius = "10"
+                            TextColor = "White"
+                            BackgroundColor = "Purple"
+                            BorderColor ="White"
+                            BorderWidth = "2"
+                            VerticalOptions = "Center"
+                            
+                            Clicked="GoToPreviousPage"/>
+                    
+                    <Label x:Name = "Title"
+                           Text = "New"
+                           FontSize = "24"
+                           TextColor = "White"
+                           FontAttributes = "Bold"
+                           VerticalOptions = "Center" />
+
+                    <Image x:Name = "ImageCat" 
+                           Source = "Food"
+                           Aspect = "AspectFit"
+                           Margin = "6"
+                           HeightRequest = "50"
+                           WidthRequest = "50"
+                           VerticalOptions = "Center" />
+                </StackLayout>
+            </Frame>
+
+
+            <Frame BorderColor="Black"
+                   Padding="5"
+                   BackgroundColor="White"
+                   VerticalOptions="Start">
+
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="CenterAndExpand">
+
+                    <Label Text="Name : "
+                           FontSize="40"
+                           TextColor="Black"
+                           HorizontalOptions="StartAndExpand"/>
+
+                    <Editor x:Name="EditName"
+                            BackgroundColor="White" 
+                            TextColor="Purple"
+                            MaxLength="30"
+                            IsTextPredictionEnabled="False"
+                            Keyboard="Default"
+                            AutoSize="TextChanges"
+                            WidthRequest="200"
+                            FontSize="30"/>
+                </StackLayout>
+            </Frame>
+
+
+            <Frame BorderColor="Black"
+                   Padding="5"
+                   BackgroundColor="White"
+                   VerticalOptions="Start">
+
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="StartAndExpand">
+
+                    <Label Text="Image : "
+                           FontSize="40"
+                           TextColor="Black"
+                           HorizontalOptions="StartAndExpand"/>
+
+                    <ImageButton x:Name="EditImage"
+                                 Source="AddImage"
+                                 HeightRequest="50"
+                                 WidthRequest="50"
+                                 BorderColor="Black"
+                                 BorderWidth="2"
+                                 
+                                 Clicked="UploadPhoto"/>
+
+                    <Image x:Name="SelectedImage"/>
+                </StackLayout>
+            </Frame>
+
+
+            <Frame BorderColor="Black"
+                   Padding="5"
+                   BackgroundColor="White"
+                   VerticalOptions="Start">
+
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="CenterAndExpand">
+
+                    <Label Text="Address : "
+                           FontSize="33"
+                           TextColor="Black"
+                           HorizontalOptions="StartAndExpand"
+                           VerticalOptions="Center"/>
+
+                    <Editor x:Name="EditAddress"
+                            BackgroundColor="White" 
+                            TextColor="Purple"
+                            MaxLength="30"
+                            IsTextPredictionEnabled="False"
+                            Keyboard="Default"
+                            AutoSize="TextChanges"
+                            WidthRequest="200"
+                            FontSize="30"/>
+                </StackLayout>
+            </Frame>
+
+
+            <Frame BorderColor="Black"
+                   Padding="5"
+                   BackgroundColor="White"
+                   VerticalOptions="Start">
+
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="CenterAndExpand">
+
+                    <Label Text="Hourly : "
+                           FontSize="40"
+                           TextColor="Black"
+                           HorizontalOptions="StartAndExpand"/>
+
+                    <Editor x:Name="EditHourly"
+                            BackgroundColor="White" 
+                            TextColor="Purple"
+                            MaxLength="30"
+                            IsTextPredictionEnabled="False"
+                            Keyboard="Default"
+                            AutoSize="TextChanges"
+                            WidthRequest="200"
+                            FontSize="30"/>
+                </StackLayout>
+            </Frame>
+
+
+            <Frame BorderColor="Black"
+                   Padding="12"
+                   BackgroundColor="White"
+                   VerticalOptions="Start">
+
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="CenterAndExpand">
+
+                    <Label Text="Expectation : "
+                           FontSize="33"
+                           TextColor="Black"
+                           HorizontalOptions="StartAndExpand"/>
+
+                    <Button x:Name="Expectation_01"
+                            WidthRequest = "40"
+                            HeightRequest = "20"
+                            Margin="1"
+                            CornerRadius="20"
+                            BorderColor="Black"
+                            BorderWidth="2"
+                            BackgroundColor="White"
+                            
+                            Clicked="Expectation_01_Clicked"/>
+
+                    <Button x:Name="Expectation_02"
+                            WidthRequest = "40"
+                            HeightRequest = "20"
+                            Margin="1"
+                            CornerRadius="20"
+                            BorderColor="Black"
+                            BorderWidth="2"
+                            BackgroundColor="White"
+                            
+                            Clicked="Expectation_02_Clicked"/>
+
+                    <Button x:Name="Expectation_03"
+                            WidthRequest = "40"
+                            HeightRequest = "20"
+                            Margin="1"
+                            CornerRadius="20"
+                            BorderColor="Black"
+                            BorderWidth="2"
+                            BackgroundColor="White"
+                            
+                            Clicked="Expectation_03_Clicked"/>
+
+                </StackLayout>
+            </Frame>
+
+
+            <Button HeightRequest = "60"
+                    WidthRequest = "200"
+                    Margin = "5"
+                    Padding="1"
+                    Text = "ADD"
+                    CornerRadius = "15"
+                    FontSize = "40"
+                    FontAttributes  = "Bold"
+                    BorderColor = "White"
+                    BorderWidth = "5"
+                    TextColor = "White"
+                    BackgroundColor = "Purple"
+                    VerticalOptions="EndAndExpand"
+                    
+                    Clicked="GoToPreviousPage"/>
+
+
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
