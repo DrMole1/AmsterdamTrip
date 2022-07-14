@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "wgUWZkGSAdiW/yCcP/HCESwstYJueO0Q11QZR3o0enMQOumlp472lhhYqNiZ/qUmYdPAv67I6aH24o1YB7sIZA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\basti\\Desktop\\Creations\\DevProjects\\AppAmsterdamV2\\AmsterdamTrip\\AmsterdamTrip.iOS\\AmsterdamTrip.iOS.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\basti\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\basti\\.nuget\\packages\\xam.plugin.media\\5.0.1\\xam.plugin.media.5.0.1.nupkg.sha512",
+    "C:\\Users\\basti\\.nuget\\packages\\xamarin.essentials\\1.7.0\\xamarin.essentials.1.7.0.nupkg.sha512",
+    "C:\\Users\\basti\\.nuget\\packages\\xamarin.forms\\5.0.0.2196\\xamarin.forms.5.0.0.2196.nupkg.sha512"
+  ],
+  "logs": []
+}
