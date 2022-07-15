@@ -51,5 +51,21 @@ namespace AmsterdamTrip.Repositories
 
             return new List<Museums>();
         }
+
+        public async Task ClearAllMuseumAsync()
+        {
+            int result = 0;
+
+            try
+            {
+                result = await _connection.DropTableAsync<Museums>();
+
+                StatusMessage = "All museums cleared !";
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Error to clear museums. \n Erreur : {ex.Message}";
+            }
+        }
     }
 }

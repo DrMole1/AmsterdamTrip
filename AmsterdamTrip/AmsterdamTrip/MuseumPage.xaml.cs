@@ -15,6 +15,14 @@ namespace AmsterdamTrip
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MuseumPage : ContentPage
     {
+        // =================================== VARIABLES ===================================
+
+        private List<ImageButton> checkButtons = new List<ImageButton>();
+        private List<Label> checkLabels = new List<Label>();
+        private bool[] isChecked = new bool[99];
+
+        // =================================================================================
+
         public MuseumPage()
         {
             InitializeComponent();
@@ -227,6 +235,41 @@ namespace AmsterdamTrip
             Debug.WriteLine("Show item");
         }
 
+        private void CheckItem(object sender, EventArgs e)
+        {
+            ImageButton button = (ImageButton)sender;
+
+            bool pass = true;
+            int index = 0;
+
+            while(pass)
+            {
+                if(checkButtons[index] == button)
+                {
+                    pass = false;
+                }
+                else
+                {
+                    index++;
+                }
+            }
+
+            if(isChecked[index])
+            {
+                button.Source = "CheckButtonOff";
+                isChecked[index] = false;
+
+                checkLabels[index].Text = "";
+            }
+            else
+            {
+                button.Source = "CheckButtonOn";
+                isChecked[index] = true;
+
+                checkLabels[index].Text = DateTime.Today.ToString("d");
+            }
+        }
+
         private async void GetMuseums(StackLayout _storageItems)
         {
             List<Museums> museums = await App.MuseumsRepository.GetMuseumsAsync();
@@ -236,6 +279,7 @@ namespace AmsterdamTrip
                 StackLayout itemLayout;
                 StackLayout informationsLayout;
                 StackLayout checkLayout;
+                StackLayout hourlyAndAddressLayout;
 
                 _storageItems.Children.Add(itemLayout = new StackLayout
                 {
@@ -252,9 +296,9 @@ namespace AmsterdamTrip
                 itemLayout.Children.Add(new Image
                 {
                     Source = ImageSource.FromStream(() => stream),
-                    Aspect = Aspect.AspectFit,
-                    HeightRequest = 50,
-                    WidthRequest = 50,
+                    Aspect = Aspect.AspectFill,
+                    HeightRequest = 90,
+                    WidthRequest = 90,
                     VerticalOptions = LayoutOptions.Center
                 });
 
@@ -270,11 +314,79 @@ namespace AmsterdamTrip
                 informationsLayout.Children.Add(new Label
                 {
                     Text = museum.Name,
-                    FontSize = 35,
+                    FontSize = 25,
                     TextColor = Color.White,
                     FontAttributes = FontAttributes.Bold,
                     VerticalOptions = LayoutOptions.End
                 });
+
+                Image imageExpectation;
+
+                informationsLayout.Children.Add(imageExpectation = new Image
+                {
+                    Source = "Expectation0",
+                    Aspect = Aspect.AspectFit,
+                    HeightRequest = 30,
+                    WidthRequest = 90,
+                    VerticalOptions = LayoutOptions.Center
+                });
+
+                if(museum.Expectation == 1) { imageExpectation.Source = "Expectation1"; }
+                else if (museum.Expectation == 2) { imageExpectation.Source = "Expectation2"; }
+                else if (museum.Expectation == 3) { imageExpectation.Source = "Expectation3"; }
+
+                informationsLayout.Children.Add(hourlyAndAddressLayout = new StackLayout
+                {
+                    BackgroundColor = Color.Gray,
+                    Spacing = 2,
+                    Orientation = StackOrientation.Horizontal
+                });
+
+                hourlyAndAddressLayout.Children.Add(new Label{
+                    Text = museum.Address,
+                    FontSize = 10,
+                    TextColor = Color.White,
+                    VerticalOptions = LayoutOptions.Center
+                });
+
+                hourlyAndAddressLayout.Children.Add(new Label
+                {
+                    Text = museum.Hourly,
+                    FontSize = 10,
+                    TextColor = Color.White,
+                    VerticalOptions = LayoutOptions.Center
+                });
+
+                itemLayout.Children.Add(checkLayout = new StackLayout
+                {
+                    BackgroundColor = Color.Gray,
+                    Margin = new Thickness(5),
+                    Padding = new Thickness(5),
+                    Spacing = 2,
+                    HorizontalOptions = LayoutOptions.EndAndExpand,
+                    Orientation = StackOrientation.Vertical
+                });
+
+                ImageButton checkButton;
+                Label checkDate;
+                checkLayout.Children.Add(checkButton = new ImageButton
+                {
+                    Source = "CheckButtonOff",
+                    Aspect = Aspect.AspectFit,
+                    HeightRequest = 60,
+                    WidthRequest = 60
+                });
+                checkButtons.Add(checkButton);
+
+                checkLayout.Children.Add(checkDate = new Label
+                {
+                    Text = "",
+                    FontSize = 10,
+                    TextColor = Color.White,
+                    VerticalOptions = LayoutOptions.Center
+                });
+                checkLabels.Add(checkDate);
+                checkButton.Pressed += CheckItem;
             }
         }
     }

@@ -1279,3 +1279,9 @@ C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\Amster
 C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\android\assets\System.Buffers.dll
 C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\android\assets\System.Memory.dll
 C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\android\assets\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\res\drawable\expectation0.png
+C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\res\drawable\expectation1.png
+C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\res\drawable\expectation2.png
+C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\res\drawable\expectation3.png
+C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\res\drawable\checkbuttonoff.png
+C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\res\drawable\checkbuttonon.png

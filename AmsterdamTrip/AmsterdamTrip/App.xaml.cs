@@ -19,6 +19,9 @@ namespace AmsterdamTrip
 
             MuseumsRepository = new MuseumsRepository(dbPath);
 
+            // FOR TESTS ONLY : CLEAR TABLE 
+            //MuseumsRepository.ClearAllMuseumAsync();
+
             MainPage = new NavigationPage(new MainPage());
         }
 
