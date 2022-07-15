@@ -50,7 +50,8 @@
             </Frame>
 
 
-            <Frame BorderColor="Black"
+            <Frame x:Name="NameFrame"
+                   BorderColor="Black"
                    Padding="5"
                    BackgroundColor="White"
                    VerticalOptions="Start">
@@ -76,7 +77,8 @@
             </Frame>
 
 
-            <Frame BorderColor="Black"
+            <Frame x:Name="ImageFrame"
+                   BorderColor="Black"
                    Padding="5"
                    BackgroundColor="White"
                    VerticalOptions="Start">
@@ -97,13 +99,12 @@
                                  BorderWidth="2"
                                  
                                  Clicked="UploadPhoto"/>
-
-                    <Image x:Name="SelectedImage"/>
                 </StackLayout>
             </Frame>
 
 
-            <Frame BorderColor="Black"
+            <Frame x:Name="AddressFrame"
+                   BorderColor="Black"
                    Padding="5"
                    BackgroundColor="White"
                    VerticalOptions="Start">
@@ -130,7 +131,8 @@
             </Frame>
 
 
-            <Frame BorderColor="Black"
+            <Frame x:Name="HourlyFrame"
+                   BorderColor="Black"
                    Padding="5"
                    BackgroundColor="White"
                    VerticalOptions="Start">
@@ -156,7 +158,8 @@
             </Frame>
 
 
-            <Frame BorderColor="Black"
+            <Frame x:Name="ExpectationFrame"
+                   BorderColor="Black"
                    Padding="12"
                    BackgroundColor="White"
                    VerticalOptions="Start">
@@ -220,7 +223,7 @@
                     BackgroundColor = "Purple"
                     VerticalOptions="EndAndExpand"
                     
-                    Clicked="GoToPreviousPage"/>
+                    Clicked="CheckIfEmptySlot"/>
 
 
 

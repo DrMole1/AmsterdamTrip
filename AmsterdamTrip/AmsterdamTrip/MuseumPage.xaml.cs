@@ -1,6 +1,8 @@
-﻿using System;
+﻿using AmsterdamTrip.Models;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -117,12 +119,11 @@ namespace AmsterdamTrip
                 }
             });
 
-            
 
 
+            Debug.WriteLine(App.MuseumsRepository.StatusMessage);
 
-
-
+            GetMuseums(storageItems);
 
 
             Frame footerFrame;
@@ -140,7 +141,6 @@ namespace AmsterdamTrip
                     Orientation = StackOrientation.Horizontal,
                     HorizontalOptions = LayoutOptions.CenterAndExpand,
                     Padding = new Thickness(5),
-                    //VerticalOptions = LayoutOptions.Start,
                     Spacing = 8
                 }
             });
@@ -225,6 +225,57 @@ namespace AmsterdamTrip
         private void ShowItem(object sender, EventArgs e)
         {
             Debug.WriteLine("Show item");
+        }
+
+        private async void GetMuseums(StackLayout _storageItems)
+        {
+            List<Museums> museums = await App.MuseumsRepository.GetMuseumsAsync();
+
+            foreach (Museums museum in museums)
+            {
+                StackLayout itemLayout;
+                StackLayout informationsLayout;
+                StackLayout checkLayout;
+
+                _storageItems.Children.Add(itemLayout = new StackLayout
+                {
+                    BackgroundColor = Color.Gray,
+                    Margin = new Thickness(5),
+                    Padding = new Thickness(5),
+                    Spacing = 2,
+                    Orientation = StackOrientation.Horizontal
+                });
+
+                byte[] byteArray = museum.Image;
+                MemoryStream stream = new MemoryStream(byteArray);
+
+                itemLayout.Children.Add(new Image
+                {
+                    Source = ImageSource.FromStream(() => stream),
+                    Aspect = Aspect.AspectFit,
+                    HeightRequest = 50,
+                    WidthRequest = 50,
+                    VerticalOptions = LayoutOptions.Center
+                });
+
+                itemLayout.Children.Add(informationsLayout = new StackLayout
+                {
+                    BackgroundColor = Color.Gray,
+                    Margin = new Thickness(5),
+                    Padding = new Thickness(5),
+                    Spacing = 2,
+                    Orientation = StackOrientation.Vertical
+                });
+
+                informationsLayout.Children.Add(new Label
+                {
+                    Text = museum.Name,
+                    FontSize = 35,
+                    TextColor = Color.White,
+                    FontAttributes = FontAttributes.Bold,
+                    VerticalOptions = LayoutOptions.End
+                });
+            }
         }
     }
 }

@@ -1271,3 +1271,11 @@ C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\Amster
 C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\android\assets\Plugin.Media.dll
 C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\android\assets\Plugin.Media.pdb
 C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\android\src\crc646957603ea1820544\MediaPickerActivity.java
+C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\android\assets\SQLite-net.dll
+C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\android\assets\SQLitePCLRaw.batteries_v2.dll
+C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\android\assets\SQLitePCLRaw.core.dll
+C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\android\assets\SQLitePCLRaw.lib.e_sqlite3.android.dll
+C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\android\assets\SQLitePCLRaw.provider.e_sqlite3.dll
+C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\android\assets\System.Buffers.dll
+C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\android\assets\System.Memory.dll
+C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip.Android\obj\Debug\120\android\assets\System.Runtime.CompilerServices.Unsafe.dll
