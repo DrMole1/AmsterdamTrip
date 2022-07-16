@@ -128,5 +128,27 @@ namespace AmsterdamTrip.Repositories
 
             return result;
         }
+
+        public async Task<int> AddPhotoMuseumAsync(Museums museum, int _slot, byte[] _photo)
+        {
+            int result = 0;
+
+            try
+            {
+                if(_slot == 1) { museum.Photo_01 = _photo; }
+                else if(_slot == 2) { museum.Photo_02 = _photo; }
+                else if(_slot == 3) { museum.Photo_03 = _photo; }
+
+                result = await _connection.UpdateAsync(museum);
+
+                StatusMessage = $"{result}  photo added.";
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Error to add photo.\n Erreur : {ex.Message}";
+            }
+
+            return result;
+        }
     }
 }

@@ -28,5 +28,11 @@ namespace AmsterdamTrip.Models
         public int IsChecked { get; set; }
 
         public string Date { get; set; }
+
+        public byte[] Photo_01 { get; set; }
+
+        public byte[] Photo_02 { get; set; }
+
+        public byte[] Photo_03 { get; set; }
     }
 }

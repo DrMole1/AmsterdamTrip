@@ -280,6 +280,7 @@ namespace AmsterdamTrip
         private async void DeleteItem(object sender, EventArgs e)
         {
             await App.MuseumsRepository.DeleteMuseumAsync(selectedMuseum);
+            mainPage.SetMuseumsCount();
             await Navigation.PopAsync();
         }
 
@@ -288,9 +289,9 @@ namespace AmsterdamTrip
             await Navigation.PushAsync(new AddItemPage(AddItemPage.Category.Museum, mainPage, this, currentIndex));
         }
 
-        private void ShowItem(object sender, EventArgs e)
+        private async void ShowItem(object sender, EventArgs e)
         {
-            Debug.WriteLine("Show item");
+            await Navigation.PushAsync(new PhotoPage(selectedMuseum.Name, AddItemPage.Category.Museum, currentIndex, selectedMuseum.Photo_01, selectedMuseum.Photo_02, selectedMuseum.Photo_03));
         }
 
         private void CheckItem(object sender, EventArgs e)

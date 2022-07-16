@@ -34,3 +34,4 @@ C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\Amster
 C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip\bin\Debug\netstandard2.0\Mono.Android.pdb
 C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip\bin\Debug\netstandard2.0\Mono.Android.xml
 C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip\obj\Debug\netstandard2.0\AmsterdamTrip.csproj.CopyComplete
+C:\Users\basti\Desktop\Creations\DevProjects\AppAmsterdamV2\AmsterdamTrip\AmsterdamTrip\obj\Debug\netstandard2.0\PhotoPage.xaml.g.cs
