@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AmsterdamTrip.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -14,11 +15,27 @@ namespace AmsterdamTrip
         public MainPage()
         {
             InitializeComponent();
+
+            SetMuseumsCount();
+        }
+
+        public async void SetMuseumsCount()
+        {
+            List<Museums> museums = await App.MuseumsRepository.GetMuseumsAsync();
+
+            int checkedMuseum = 0;
+            foreach(Museums museum in museums)
+            {
+                if(museum.IsChecked == 1) { checkedMuseum++; }
+            }
+
+            TotalMuseums.Text = checkedMuseum.ToString() + " / " + museums.Count.ToString();
         }
 
         private async void GoToMuseumPage(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MuseumPage());
+            SetMuseumsCount();
+            await Navigation.PushAsync(new MuseumPage(this));
         }
 
         private void GoToPlacePage(object sender, EventArgs e)

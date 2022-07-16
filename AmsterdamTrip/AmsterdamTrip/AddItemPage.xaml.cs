@@ -12,6 +12,7 @@ using Xamarin.Forms.Xaml;
 using Color = Xamarin.Forms.Color;
 using System.IO;
 using Java.IO;
+using AmsterdamTrip.Models;
 
 namespace AmsterdamTrip
 {
@@ -26,24 +27,91 @@ namespace AmsterdamTrip
         private bool isImageSet = false;
         private Category category = Category.Museum;
         private Stream stream;
-        byte[] dataImage = null;
+        private byte[] dataImage = null;
+        private MainPage mainPage;
+        private bool usedToUpdate = false;
+        private Museums currentMuseum;
+        private MuseumPage museumPage;
 
         // =========================================================================
 
-        public AddItemPage(Category _cat)
+        public AddItemPage(Category _cat, MainPage _mainPage, MuseumPage _museumPage)
         {
             InitializeComponent();
 
+            mainPage = _mainPage;
             category = _cat;
+            museumPage = _museumPage;
 
             Title.Text = "New " + _cat.ToString();
             ImageCat.Source = _cat.ToString();
         }
 
+        public AddItemPage(Category _cat, MainPage _mainPage, MuseumPage _museumPage, int _index)
+        {
+            InitializeComponent();
+
+            mainPage = _mainPage;
+            category = _cat;
+            usedToUpdate = true;
+            museumPage = _museumPage;
+
+            Title.Text = "Update " + _cat.ToString();
+            ImageCat.Source = _cat.ToString();
+
+            if(category == Category.Museum) { SetMuseumPage(_index); }
+        }
+
+        private async void SetMuseumPage(int _index)
+        {
+            List<Museums> museums = await App.MuseumsRepository.GetMuseumsAsync();
+            currentMuseum = museums[_index];
+
+            EditName.Text = museums[_index].Name;
+            EditAddress.Text = museums[_index].Address;
+            EditHourly.Text = museums[_index].Hourly;
+
+            if(museums[_index].Expectation == 1)
+            {
+                expectationLevel = 1;
+
+                Expectation_01.BackgroundColor = Color.Blue;
+                Expectation_02.BackgroundColor = Color.White;
+                Expectation_03.BackgroundColor = Color.White;
+            }
+            else if (museums[_index].Expectation == 2)
+            {
+                expectationLevel = 2;
+
+                Expectation_01.BackgroundColor = Color.Purple;
+                Expectation_02.BackgroundColor = Color.Purple;
+                Expectation_03.BackgroundColor = Color.White;
+            }
+            else if (museums[_index].Expectation == 3)
+            {
+                expectationLevel = 3;
+
+                Expectation_01.BackgroundColor = Color.Gold;
+                Expectation_02.BackgroundColor = Color.Gold;
+                Expectation_03.BackgroundColor = Color.Gold;
+            }
+
+            byte[] byteArray = museums[_index].Image;
+            MemoryStream stream = new MemoryStream(byteArray);
+            MemoryStream streamTemp = new MemoryStream(byteArray);
+            EditImage.Source = ImageSource.FromStream(() => streamTemp);
+            using (MemoryStream memory = new MemoryStream())
+            {
+                stream.CopyTo(memory);
+                dataImage = memory.ToArray();
+            }
+            isImageSet = true;
+        }
+
 
         private async void GoToPreviousPage(object sender, EventArgs e)
         {
-            await Navigation.PopAsync();
+            await Navigation.PushAsync(new MuseumPage(mainPage));
         }
 
         private void Expectation_01_Clicked(object sender, EventArgs e)
@@ -182,9 +250,19 @@ namespace AmsterdamTrip
 
         private async void AddItem()
         {
-            await App.MuseumsRepository.AddNewMuseumAsync(EditName.Text, dataImage, EditAddress.Text, EditHourly.Text, expectationLevel);
+            if(!usedToUpdate)
+            {
+                await App.MuseumsRepository.AddNewMuseumAsync(EditName.Text, dataImage, EditAddress.Text, EditHourly.Text, expectationLevel);
+            }
+            else
+            {
+                await App.MuseumsRepository.UpdateMuseumAsync(currentMuseum, EditName.Text, dataImage, EditAddress.Text, EditHourly.Text, expectationLevel);
+            }
 
             Debug.WriteLine(App.MuseumsRepository.StatusMessage);
+
+            mainPage.SetMuseumsCount();
+            museumPage.GetMuseums();
 
             await Navigation.PopAsync();
         }

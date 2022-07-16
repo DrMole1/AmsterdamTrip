@@ -24,5 +24,9 @@ namespace AmsterdamTrip.Models
         public string Hourly { get; set; }
 
         public int Expectation { get; set; }
+
+        public int IsChecked { get; set; }
+
+        public string Date { get; set; }
     }
 }

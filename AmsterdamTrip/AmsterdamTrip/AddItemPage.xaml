@@ -97,6 +97,7 @@
                                  WidthRequest="50"
                                  BorderColor="Black"
                                  BorderWidth="2"
+                                 Aspect="AspectFill"
                                  
                                  Clicked="UploadPhoto"/>
                 </StackLayout>

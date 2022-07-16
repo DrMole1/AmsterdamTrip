@@ -20,12 +20,25 @@ namespace AmsterdamTrip
         private List<ImageButton> checkButtons = new List<ImageButton>();
         private List<Label> checkLabels = new List<Label>();
         private bool[] isChecked = new bool[99];
+        private List<ImageButton> itemButtons = new List<ImageButton>();
+        private List<StackLayout> itemLayouts = new List<StackLayout>();
+        private MainPage mainPage { get; set; }
+
+        private Museums selectedMuseum;
+        private int currentIndex = 0;
+
+        private StackLayout footer;
+        private bool isPanelShowed = false;
+
+        private StackLayout storageItems;
 
         // =================================================================================
 
-        public MuseumPage()
+        public MuseumPage(MainPage _mainPage)
         {
             InitializeComponent();
+
+            mainPage = _mainPage;
 
             StackLayout mainLayout = new StackLayout
             {
@@ -113,7 +126,7 @@ namespace AmsterdamTrip
 
             Frame listItemsFrame;
             ScrollView listItems;
-            StackLayout storageItems;
+            StackLayout _storageItems;
 
             // Intégration du list items
             mainLayout.Children.Add(listItemsFrame = new Frame
@@ -123,7 +136,7 @@ namespace AmsterdamTrip
                 BackgroundColor = Color.Black,
                 Content = listItems = new ScrollView
                 {
-                    Content = storageItems = new StackLayout { }
+                    Content = _storageItems = new StackLayout { }
                 }
             });
 
@@ -131,11 +144,11 @@ namespace AmsterdamTrip
 
             Debug.WriteLine(App.MuseumsRepository.StatusMessage);
 
-            GetMuseums(storageItems);
+            storageItems = _storageItems;
+            GetMuseums();
 
 
             Frame footerFrame;
-            StackLayout footer;
 
             // Intégration du frame footer
             mainLayout.Children.Add(footerFrame = new Frame
@@ -152,6 +165,62 @@ namespace AmsterdamTrip
                     Spacing = 8
                 }
             });
+
+            Content = mainLayout;
+        }
+
+        private async void GoToPreviousPage(object sender, EventArgs e)
+        {
+            await Navigation.PopAsync();
+        }
+
+        private async void AddItem(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddItemPage(AddItemPage.Category.Museum, mainPage, this));
+        }
+
+        private void SelectItem(object sender, EventArgs e)
+        {
+            ImageButton button = (ImageButton)sender;
+
+            bool pass = true;
+            int index = 0;
+
+            itemLayouts[currentIndex].BackgroundColor = Color.Gray;
+
+            while (pass)
+            {
+                if (itemButtons[index] == button)
+                {
+                    pass = false;
+                }
+                else
+                {
+                    index++;
+                }
+            }
+
+            currentIndex = index;
+
+            itemLayouts[currentIndex].BackgroundColor = Color.Purple;
+
+            SelectItemAsync(index);
+
+            ShowPanelButtons();
+        }
+
+        private async void SelectItemAsync(int _index)
+        {
+            List<Museums> museums = await App.MuseumsRepository.GetMuseumsAsync();
+
+            selectedMuseum = museums[_index];
+        }
+
+        private void ShowPanelButtons()
+        {
+            if(isPanelShowed) { return; }
+
+            isPanelShowed = true;
 
             // DELETE BUTTON
             Button deleteButton;
@@ -206,28 +275,17 @@ namespace AmsterdamTrip
                 VerticalOptions = LayoutOptions.Center
             });
             showButton.Pressed += ShowItem;
-
-            Content = mainLayout;
         }
 
-        private async void GoToPreviousPage(object sender, EventArgs e)
+        private async void DeleteItem(object sender, EventArgs e)
         {
+            await App.MuseumsRepository.DeleteMuseumAsync(selectedMuseum);
             await Navigation.PopAsync();
         }
 
-        private async void AddItem(object sender, EventArgs e)
+        private async void ModifyItem(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AddItemPage(AddItemPage.Category.Museum));
-        }
-
-        private void DeleteItem(object sender, EventArgs e)
-        {
-            Debug.WriteLine("Delete item");
-        }
-
-        private void ModifyItem(object sender, EventArgs e)
-        {
-            Debug.WriteLine("Modify item");
+            await Navigation.PushAsync(new AddItemPage(AddItemPage.Category.Museum, mainPage, this, currentIndex));
         }
 
         private void ShowItem(object sender, EventArgs e)
@@ -268,20 +326,34 @@ namespace AmsterdamTrip
 
                 checkLabels[index].Text = DateTime.Today.ToString("d");
             }
+
+            int intCheck = 0;
+            if (isChecked[index]) { intCheck = 1; }
+
+            SaveCheckItem(index, intCheck, checkLabels[index].Text);
         }
 
-        private async void GetMuseums(StackLayout _storageItems)
+        private async void SaveCheckItem(int _index, int _isChecked, string _date)
+        {
+            List<Museums> museums = await App.MuseumsRepository.GetMuseumsAsync();
+
+            await App.MuseumsRepository.CheckMuseumAsync(museums[_index], _isChecked, _date);
+
+            mainPage.SetMuseumsCount();
+        }
+
+        public async void GetMuseums()
         {
             List<Museums> museums = await App.MuseumsRepository.GetMuseumsAsync();
 
             foreach (Museums museum in museums)
-            {
-                StackLayout itemLayout;
+            {           
                 StackLayout informationsLayout;
                 StackLayout checkLayout;
                 StackLayout hourlyAndAddressLayout;
+                StackLayout itemLayout;
 
-                _storageItems.Children.Add(itemLayout = new StackLayout
+                storageItems.Children.Add(itemLayout = new StackLayout
                 {
                     BackgroundColor = Color.Gray,
                     Margin = new Thickness(5),
@@ -289,11 +361,13 @@ namespace AmsterdamTrip
                     Spacing = 2,
                     Orientation = StackOrientation.Horizontal
                 });
+                itemLayouts.Add(itemLayout);
 
                 byte[] byteArray = museum.Image;
                 MemoryStream stream = new MemoryStream(byteArray);
 
-                itemLayout.Children.Add(new Image
+                ImageButton itemButton;
+                itemLayout.Children.Add(itemButton = new ImageButton
                 {
                     Source = ImageSource.FromStream(() => stream),
                     Aspect = Aspect.AspectFill,
@@ -301,10 +375,11 @@ namespace AmsterdamTrip
                     WidthRequest = 90,
                     VerticalOptions = LayoutOptions.Center
                 });
+                itemButtons.Add(itemButton);
+                itemButton.Pressed += SelectItem;
 
                 itemLayout.Children.Add(informationsLayout = new StackLayout
                 {
-                    BackgroundColor = Color.Gray,
                     Margin = new Thickness(5),
                     Padding = new Thickness(5),
                     Spacing = 2,
@@ -337,7 +412,6 @@ namespace AmsterdamTrip
 
                 informationsLayout.Children.Add(hourlyAndAddressLayout = new StackLayout
                 {
-                    BackgroundColor = Color.Gray,
                     Spacing = 2,
                     Orientation = StackOrientation.Horizontal
                 });
@@ -359,7 +433,6 @@ namespace AmsterdamTrip
 
                 itemLayout.Children.Add(checkLayout = new StackLayout
                 {
-                    BackgroundColor = Color.Gray,
                     Margin = new Thickness(5),
                     Padding = new Thickness(5),
                     Spacing = 2,
@@ -387,6 +460,12 @@ namespace AmsterdamTrip
                 });
                 checkLabels.Add(checkDate);
                 checkButton.Pressed += CheckItem;
+
+                if (museum.IsChecked == 1)
+                {
+                    checkButton.Source = "CheckButtonOn";
+                    checkDate.Text = museum.Date.ToString();
+                }
             }
         }
     }
